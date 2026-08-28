@@ -49,8 +49,6 @@ LOAD_TIMEOUT = 12,
 SPECIAL_TRACK_LIMITS = {
 	["75485931767123"] = 115,
 },
-
-
 }
 
 --==============================================================
@@ -75,8 +73,6 @@ Muted = Color3.fromRGB(82, 84, 103),
 Green = Color3.fromRGB(76, 222, 148),
 Yellow = Color3.fromRGB(245, 194, 83),
 Red = Color3.fromRGB(244, 82, 102),
-
-
 }
 
 --==============================================================
@@ -113,8 +109,6 @@ PINK = {
 	A = Color3.fromRGB(244, 84, 179),
 	B = Color3.fromRGB(116, 80, 255),
 },
-
-
 }
 
 --==============================================================
@@ -259,8 +253,6 @@ EN = {
 	footer =
 		"TEAM PRIME • PREMIUM AUDIO",
 },
-
-
 }
 
 --==============================================================
@@ -305,7 +297,8 @@ LoadToken = 0,
 SavedMouseBehavior = nil,
 SavedMouseIcon = nil,
 
-
+-- MOBILE DRAG
+DragInput = nil,
 }
 
 --==============================================================
@@ -318,7 +311,7 @@ CONFIG.GUI_NAME
 )
 
 if OldGui then
-OldGui:Destroy()
+	OldGui:Destroy()
 end
 
 --==============================================================
@@ -345,7 +338,6 @@ end
 
 return tostring(value)
 
-
 end
 
 local function IsMobile()
@@ -358,7 +350,6 @@ if not camera then
 end
 
 return camera.ViewportSize.X <= 650
-
 
 end
 
@@ -390,7 +381,6 @@ return string.format(
 	seconds
 )
 
-
 end
 
 --==============================================================
@@ -417,7 +407,6 @@ ui.Parent =
 	object
 
 return ui
-
 
 end
 
@@ -446,7 +435,6 @@ ui.Parent =
 	object
 
 return ui
-
 
 end
 
@@ -482,7 +470,6 @@ ui.Parent =
 	object
 
 return ui
-
 
 end
 
@@ -527,7 +514,6 @@ ui.Parent =
 	parent
 
 return ui
-
 
 end
 
@@ -583,7 +569,6 @@ Stroke(
 
 return ui
 
-
 end
 
 local function TweenObject(
@@ -636,7 +621,6 @@ local tween =
 tween:Play()
 
 return tween
-
 
 end
 
@@ -724,8 +708,6 @@ BASE.Background,
 BASE.Background2,
 135
 )
-
--- Decorative startup glow
 
 local StartupGlow =
 Instance.new(
@@ -1013,7 +995,6 @@ CONFIG.DESKTOP_HEIGHT
 Main.BackgroundColor3 =
 BASE.Background
 
--- НЕ анимируем прозрачность Main.
 Main.BackgroundTransparency =
 0
 
@@ -2715,8 +2696,6 @@ KEY = "purple",
 	ID = "PINK",
 	KEY = "pink",
 },
-
-
 }
 
 for index, data in ipairs(
@@ -2754,7 +2733,6 @@ ThemeButtons[
 	data.ID
 ] =
 	button
-
 
 end
 
@@ -3039,7 +3017,6 @@ TrackStatus.TextColor3 =
 	color
 	or BASE.Secondary
 
-
 end
 
 local function SetVolume(
@@ -3087,7 +3064,6 @@ then
 		value
 end
 
-
 end
 
 local function SetSpeed(
@@ -3124,7 +3100,6 @@ if State.CurrentSound then
 		value
 end
 
-
 end
 
 local function SetScale(
@@ -3156,7 +3131,6 @@ ScaleValue.Text =
 		value * 100
 	)
 	.. "%"
-
 
 end
 
@@ -3196,7 +3170,6 @@ OpacityKnob.Position =
 		0.5,
 		0
 	)
-
 
 end
 
@@ -3250,7 +3223,6 @@ else
 		BASE.Card2
 end
 
-
 end
 
 local function UpdateMute()
@@ -3285,7 +3257,6 @@ else
 			State.Volume
 	end
 end
-
 
 end
 
@@ -3402,7 +3373,7 @@ if not State.AudioID then
 end
 
 for _, data in ipairs(
-	ThemeList
+ThemeList
 ) do
 
 	local button =
@@ -3421,13 +3392,10 @@ for _, data in ipairs(
 	end
 end
 
--- IMPORTANT:
--- These functions are already defined ABOVE.
 UpdateLoop()
 UpdateMute()
 
 FixTextVisibility()
-
 
 end
 
@@ -3537,7 +3505,6 @@ else
 		1
 end
 
-
 end
 
 --==============================================================
@@ -3547,7 +3514,7 @@ end
 function FixTextVisibility()
 
 for _, object in ipairs(
-	GUI:GetDescendants()
+GUI:GetDescendants()
 ) do
 
 	if
@@ -3562,7 +3529,6 @@ for _, object in ipairs(
 			0
 	end
 end
-
 
 end
 
@@ -3598,7 +3564,6 @@ if sound then
 		end
 	)
 end
-
 
 end
 
@@ -3656,7 +3621,6 @@ sound.Ended:Connect(
 			return
 		end
 
-		-- NEVER start another song.
 		State.CurrentSound =
 			nil
 
@@ -3704,7 +3668,6 @@ sound.Ended:Connect(
 
 return sound
 
-
 end
 
 --==============================================================
@@ -3735,7 +3698,6 @@ if value == "" then
 	return nil
 end
 
--- Raw numeric ID
 if value:match(
 	"^%d+$"
 ) then
@@ -3743,7 +3705,6 @@ if value:match(
 	return value
 end
 
--- rbxassetid://123
 local id =
 	value:match(
 		"rbxassetid://(%d+)"
@@ -3753,7 +3714,6 @@ if id then
 	return id
 end
 
--- Roblox library URLs
 local patterns = {
 	"/library/(%d+)",
 	"/asset/(%d+)",
@@ -3763,7 +3723,7 @@ local patterns = {
 }
 
 for _, pattern in ipairs(
-	patterns
+patterns
 ) do
 
 	id =
@@ -3777,7 +3737,6 @@ for _, pattern in ipairs(
 end
 
 return nil
-
 
 end
 
@@ -3913,7 +3872,6 @@ task.spawn(
 	end
 )
 
-
 end
 
 local function LoadAudio()
@@ -3934,9 +3892,8 @@ if not id then
 end
 
 LoadRobloxAudio(
-	id
+id
 )
-
 
 end
 
@@ -4012,7 +3969,6 @@ SetStatus(
 	BASE.Green
 )
 
-
 end
 
 local function PauseAudio()
@@ -4036,7 +3992,6 @@ SetStatus(
 	L().paused,
 	BASE.Yellow
 )
-
 
 end
 
@@ -4066,7 +4021,6 @@ SetStatus(
 	BASE.Secondary
 )
 
-
 end
 
 --==============================================================
@@ -4094,7 +4048,6 @@ UserInputService.MouseBehavior =
 UserInputService.MouseIconEnabled =
 	true
 
-
 end
 
 local function RestoreMouse()
@@ -4116,7 +4069,6 @@ State.SavedMouseBehavior =
 
 State.SavedMouseIcon =
 	nil
-
 
 end
 
@@ -4179,7 +4131,6 @@ local percent =
 sound.TimePosition =
 	percent
 	* length
-
 
 end
 
@@ -4317,7 +4268,6 @@ end
 
 FixTextVisibility()
 
-
 end
 
 --==============================================================
@@ -4408,7 +4358,6 @@ task.delay(
 		end
 	end
 )
-
 
 end
 
@@ -4774,7 +4723,6 @@ else
 		true
 end
 
-
 end
 
 --==============================================================
@@ -4784,70 +4732,129 @@ end
 Header.InputBegan:Connect(
 function(input)
 
-	if IsMobile() then
-		return
-	end
-
+	-- DESKTOP
 	if input.UserInputType
-		~= Enum.UserInputType.MouseButton1
+		== Enum.UserInputType.MouseButton1
 	then
 
-		return
-	end
+		local position =
+			input.Position
 
-	local position =
-		input.Position
+		local function Inside(
+			object
+		)
 
-	local function Inside(
-		object
-	)
+			if not object then
+				return false
+			end
 
-		if not object then
-			return false
+			local p =
+				object.AbsolutePosition
+
+			local s =
+				object.AbsoluteSize
+
+			return
+				position.X >= p.X
+				and
+				position.X <=
+					p.X + s.X
+
+				and
+
+				position.Y >= p.Y
+				and
+				position.Y <=
+					p.Y + s.Y
 		end
 
-		local p =
-			object.AbsolutePosition
+		if
+			Inside(SettingsButton)
+			or
+			Inside(MinimizeButton)
+			or
+			Inside(CloseButton)
+		then
 
-		local s =
-			object.AbsoluteSize
+			return
+		end
+
+		State.Dragging =
+			true
+
+		State.DragStart =
+			position
+
+		State.DragOrigin =
+			Main.Position
+
+		State.DragInput =
+			input
 
 		return
-			position.X >= p.X
-			and
-			position.X <=
-				p.X + s.X
-
-			and
-
-			position.Y >= p.Y
-			and
-			position.Y <=
-				p.Y + s.Y
 	end
 
-	if
-		Inside(SettingsButton)
-		or
-		Inside(MinimizeButton)
-		or
-		Inside(CloseButton)
+	-- MOBILE
+	if input.UserInputType
+		== Enum.UserInputType.Touch
 	then
 
-		return
+		local position =
+			input.Position
+
+		local function Inside(
+			object
+		)
+
+			if not object then
+				return false
+			end
+
+			local p =
+				object.AbsolutePosition
+
+			local s =
+				object.AbsoluteSize
+
+			return
+				position.X >= p.X
+				and
+				position.X <=
+					p.X + s.X
+
+				and
+
+				position.Y >= p.Y
+				and
+				position.Y <=
+					p.Y + s.Y
+		end
+
+		if
+			Inside(SettingsButton)
+			or
+			Inside(MinimizeButton)
+			or
+			Inside(CloseButton)
+		then
+
+			return
+		end
+
+		State.Dragging =
+			true
+
+		State.DragStart =
+			position
+
+		State.DragOrigin =
+			Main.Position
+
+		State.DragInput =
+			input
+
 	end
-
-	State.Dragging =
-		true
-
-	State.DragStart =
-		position
-
-	State.DragOrigin =
-		Main.Position
 end
-
-
 )
 
 --==============================================================
@@ -4857,60 +4864,95 @@ end
 UserInputService.InputChanged:Connect(
 function(input)
 
+	-- DESKTOP MOUSE MOVEMENT
 	if input.UserInputType
-		~= Enum.UserInputType.MouseMovement
+		== Enum.UserInputType.MouseMovement
 	then
+
+		if
+			State.Dragging
+			and State.DragStart
+			and State.DragOrigin
+			and (
+				not State.DragInput
+				or State.DragInput.UserInputType
+					== Enum.UserInputType.MouseButton1
+			)
+		then
+
+			local delta =
+				input.Position
+				- State.DragStart
+
+			Main.Position =
+				UDim2.new(
+					State.DragOrigin.X.Scale,
+					State.DragOrigin.X.Offset
+						+ delta.X,
+
+					State.DragOrigin.Y.Scale,
+					State.DragOrigin.Y.Offset
+						+ delta.Y
+				)
+		end
+
+		if State.VolumeDragging then
+
+			local width =
+				VolumeBack.AbsoluteSize.X
+
+			if width > 0 then
+
+				SetVolume(
+					(
+						input.Position.X
+						- VolumeBack.AbsolutePosition.X
+					)
+					/ width
+				)
+			end
+		end
+
+		if State.Seeking then
+
+			SeekFromX(
+				input.Position.X
+			)
+		end
+
 		return
 	end
 
-	if
-		State.Dragging
-		and State.DragStart
-		and State.DragOrigin
+	-- MOBILE TOUCH MOVEMENT
+	if input.UserInputType
+		== Enum.UserInputType.Touch
 	then
 
-		local delta =
-			input.Position
-			- State.DragStart
+		if
+			State.Dragging
+			and State.DragStart
+			and State.DragOrigin
+			and State.DragInput
+			and input == State.DragInput
+		then
 
-		Main.Position =
-			UDim2.new(
-				State.DragOrigin.X.Scale,
-				State.DragOrigin.X.Offset
-					+ delta.X,
+			local delta =
+				input.Position
+				- State.DragStart
 
-				State.DragOrigin.Y.Scale,
-				State.DragOrigin.Y.Offset
-					+ delta.Y
-			)
-	end
+			Main.Position =
+				UDim2.new(
+					State.DragOrigin.X.Scale,
+					State.DragOrigin.X.Offset
+						+ delta.X,
 
-	if State.VolumeDragging then
-
-		local width =
-			VolumeBack.AbsoluteSize.X
-
-		if width > 0 then
-
-			SetVolume(
-				(
-					input.Position.X
-					- VolumeBack.AbsolutePosition.X
+					State.DragOrigin.Y.Scale,
+					State.DragOrigin.Y.Offset
+						+ delta.Y
 				)
-				/ width
-			)
 		end
 	end
-
-	if State.Seeking then
-
-		SeekFromX(
-			input.Position.X
-		)
-	end
 end
-
-
 )
 
 UserInputService.InputEnded:Connect(
@@ -4926,6 +4968,10 @@ function(input)
 			== Enum.UserInputType.Touch
 	then
 
+		if State.DragInput == input then
+			State.DragInput = nil
+		end
+
 		State.Dragging =
 			false
 
@@ -4936,8 +4982,6 @@ function(input)
 			false
 	end
 end
-
-
 )
 
 --==============================================================
@@ -4975,8 +5019,6 @@ function(input)
 		end
 	end
 end
-
-
 )
 
 ProgressBack.InputBegan:Connect(
@@ -5000,8 +5042,6 @@ function(input)
 		)
 	end
 end
-
-
 )
 
 OpacityBack.InputBegan:Connect(
@@ -5032,8 +5072,6 @@ function(input)
 		end
 	end
 end
-
-
 )
 
 --==============================================================
@@ -5051,8 +5089,6 @@ function(enterPressed)
 		LoadAudio()
 	end
 end
-
-
 )
 
 PlayButton.MouseButton1Click:Connect(
@@ -5075,8 +5111,6 @@ function()
 
 	UpdateLoop()
 end
-
-
 )
 
 SettingsLoopButton.MouseButton1Click:Connect(
@@ -5087,8 +5121,6 @@ function()
 
 	UpdateLoop()
 end
-
-
 )
 
 MuteButton.MouseButton1Click:Connect(
@@ -5100,8 +5132,6 @@ function()
 	UpdateMute()
 	ApplyLanguage()
 end
-
-
 )
 
 SettingsMuteButton.MouseButton1Click:Connect(
@@ -5113,8 +5143,6 @@ function()
 	UpdateMute()
 	ApplyLanguage()
 end
-
-
 )
 
 SpeedMinus.MouseButton1Click:Connect(
@@ -5125,8 +5153,6 @@ function()
 			- CONFIG.SPEED_STEP
 	)
 end
-
-
 )
 
 SpeedPlus.MouseButton1Click:Connect(
@@ -5137,8 +5163,6 @@ function()
 			+ CONFIG.SPEED_STEP
 	)
 end
-
-
 )
 
 --==============================================================
@@ -5165,8 +5189,6 @@ function()
 
 	FixTextVisibility()
 end
-
-
 )
 
 SettingsBack.MouseButton1Click:Connect(
@@ -5183,8 +5205,6 @@ function()
 
 	FixTextVisibility()
 end
-
-
 )
 
 SettingsMusicTab.MouseButton1Click:Connect(
@@ -5196,8 +5216,6 @@ function()
 	SettingsDesignPage.Visible =
 		false
 end
-
-
 )
 
 SettingsDesignTab.MouseButton1Click:Connect(
@@ -5209,8 +5227,6 @@ function()
 	SettingsDesignPage.Visible =
 		true
 end
-
-
 )
 
 --==============================================================
@@ -5225,8 +5241,6 @@ function()
 
 	ApplyLanguage()
 end
-
-
 )
 
 GlowButton.MouseButton1Click:Connect(
@@ -5238,8 +5252,6 @@ function()
 	ApplyTheme()
 	ApplyLanguage()
 end
-
-
 )
 
 ScaleMinus.MouseButton1Click:Connect(
@@ -5250,8 +5262,6 @@ function()
 			- 0.05
 	)
 end
-
-
 )
 
 ScalePlus.MouseButton1Click:Connect(
@@ -5262,8 +5272,6 @@ function()
 			+ 0.05
 	)
 end
-
-
 )
 
 for themeID, button in pairs(
@@ -5281,7 +5289,6 @@ button.MouseButton1Click:Connect(
 		FixTextVisibility()
 	end
 )
-
 
 end
 
@@ -5307,8 +5314,6 @@ function()
 	StartupEN.BackgroundColor3 =
 		BASE.Card2
 end
-
-
 )
 
 StartupEN.MouseButton1Click:Connect(
@@ -5329,8 +5334,6 @@ function()
 	StartupRU.BackgroundColor3 =
 		BASE.Card2
 end
-
-
 )
 
 --==============================================================
@@ -5350,8 +5353,6 @@ function()
 
 	ShowHub()
 end
-
-
 )
 
 --==============================================================
@@ -5428,8 +5429,6 @@ function()
 		)
 	end
 end
-
-
 )
 
 --==============================================================
@@ -5441,8 +5440,6 @@ function()
 
 	HideHub()
 end
-
-
 )
 
 --==============================================================
@@ -5472,8 +5469,6 @@ function(input, processed)
 		HideHub()
 	end
 end
-
-
 )
 
 --==============================================================
@@ -5512,8 +5507,6 @@ function()
 				limit
 				or realLength
 
-			-- 75485931767123:
-			-- stop at exactly 1:55.
 			if
 				limit
 				and position >= limit
@@ -5638,7 +5631,6 @@ function()
 				1
 		end
 
-		-- Startup glow pulse.
 		if Startup.Visible then
 
 			StartupGlow.Size =
@@ -5664,8 +5656,6 @@ function()
 		)
 	end
 end
-
-
 )
 
 --==============================================================
@@ -5846,7 +5836,6 @@ task.delay(
 	end
 )
 
-
 end
 
 --==============================================================
@@ -5895,7 +5884,6 @@ function()
 
 		ApplyLayout()
 
-		-- Only fix text, never touch camera.
 		FixTextVisibility()
 
 		task.wait(
@@ -5903,8 +5891,6 @@ function()
 		)
 	end
 end
-
-
 )
 
 --==============================================================
@@ -5920,8 +5906,6 @@ function(_, parent)
 		DestroyCurrentSound()
 	end
 end
-
-
 )
 
 --==============================================================
@@ -5943,7 +5927,7 @@ print("PREMIUM CLOSE           : READY")
 print("MINIMIZE                : READY")
 print("CLOSE                   : READY")
 print("RIGHT SHIFT             : READY")
-print("DRAG                    : READY")
+print("DRAG                    : DESKTOP + MOBILE")
 print("MOBILE                  : READY")
 print("VOLUME                  : READY")
 print("SPEED                   : READY")
